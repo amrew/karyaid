@@ -1,8 +1,16 @@
-import Image from "next/image"
-import Link from "next/link"
-import { ArrowUpRight, ChevronUp, Rocket, Calendar, Tag, Bookmark, MapPin } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Header } from "@/components/header"
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowUpRight,
+  ChevronUp,
+  Rocket,
+  Calendar,
+  Tag,
+  Bookmark,
+  MapPin,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Header } from "@/components/header";
 
 // This would come from a database in a real app
 const getProductById = (id: string) => {
@@ -64,13 +72,17 @@ const getProductById = (id: string) => {
       pricingType: "Free (commission-based)",
       category: "Food",
     },
-  }
+  };
 
-  return products[id as keyof typeof products]
-}
+  return products[id as keyof typeof products];
+};
 
-export default function ProductPage({ params }: { params: { id: string } }) {
-  const product = getProductById(params.id)
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const product = getProductById((await params).id);
 
   if (!product) {
     return (
@@ -80,7 +92,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <h1 className="text-2xl font-bold">Product not found</h1>
         </main>
       </div>
-    )
+    );
   }
 
   return (
@@ -102,8 +114,12 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               </div>
 
               <div className="flex-grow">
-                <h1 className="text-3xl font-bold mb-2 gradient-text">{product.name}</h1>
-                <p className="text-xl text-muted-foreground mb-4">{product.tagline}</p>
+                <h1 className="text-3xl font-bold mb-2 gradient-text">
+                  {product.name}
+                </h1>
+                <p className="text-xl text-muted-foreground mb-4">
+                  {product.tagline}
+                </p>
 
                 <div className="flex flex-wrap items-center gap-4 mb-6">
                   <Button
@@ -111,7 +127,11 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                     variant="outline"
                     className="gap-2 border-orange hover:bg-orange-light/20 hover:text-orange-dark"
                   >
-                    <Link href={product.url} target="_blank" rel="noopener noreferrer">
+                    <Link
+                      href={product.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Visit Website
                       <ArrowUpRight className="h-4 w-4" />
                     </Link>
@@ -132,7 +152,10 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                     className="rounded-full mr-2 border border-orange-light/30"
                   />
                   <span className="text-sm">
-                    Made by <span className="font-medium text-orange-dark">{product.maker.name}</span>
+                    Made by{" "}
+                    <span className="font-medium text-orange-dark">
+                      {product.maker.name}
+                    </span>
                   </span>
                   {product.maker.location && (
                     <span className="flex items-center text-xs text-orange-dark ml-2">
@@ -147,16 +170,26 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             <div className="grid md:grid-cols-3 gap-8">
               <div className="md:col-span-2 space-y-6">
                 <div className="bg-white p-6 rounded-xl border border-orange-light/30 shadow-md">
-                  <h2 className="text-xl font-semibold mb-3 text-orange-dark">About {product.name}</h2>
-                  <p className="text-muted-foreground">{product.longDescription}</p>
+                  <h2 className="text-xl font-semibold mb-3 text-orange-dark">
+                    About {product.name}
+                  </h2>
+                  <p className="text-muted-foreground">
+                    {product.longDescription}
+                  </p>
                 </div>
 
                 <div className="pt-4">
-                  <h2 className="text-xl font-semibold mb-3 text-orange-dark">Discussion</h2>
+                  <h2 className="text-xl font-semibold mb-3 text-orange-dark">
+                    Discussion
+                  </h2>
                   <div className="bg-white rounded-xl p-6 text-center border border-orange-light/30 shadow-md">
                     <Rocket className="h-8 w-8 mx-auto mb-2 text-orange" />
-                    <p className="text-muted-foreground">Login to join the discussion about this product</p>
-                    <Button className="mt-4 bg-orange hover:bg-orange-dark">Bergabung dalam diskusi</Button>
+                    <p className="text-muted-foreground">
+                      Login to join the discussion about this product
+                    </p>
+                    <Button className="mt-4 bg-orange hover:bg-orange-dark">
+                      Bergabung dalam diskusi
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -166,7 +199,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   <div className="flex items-start">
                     <Calendar className="h-5 w-5 text-orange mr-2 flex-shrink-0 mt-0.5" />
                     <div>
-                      <h3 className="text-sm font-medium text-muted-foreground">LAUNCHED</h3>
+                      <h3 className="text-sm font-medium text-muted-foreground">
+                        LAUNCHED
+                      </h3>
                       <p className="font-medium">{product.launchDate}</p>
                     </div>
                   </div>
@@ -174,7 +209,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   <div className="flex items-start">
                     <Tag className="h-5 w-5 text-orange mr-2 flex-shrink-0 mt-0.5" />
                     <div>
-                      <h3 className="text-sm font-medium text-muted-foreground">PRICING</h3>
+                      <h3 className="text-sm font-medium text-muted-foreground">
+                        PRICING
+                      </h3>
                       <p className="font-medium">{product.pricingType}</p>
                     </div>
                   </div>
@@ -182,7 +219,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   <div className="flex items-start">
                     <Bookmark className="h-5 w-5 text-orange mr-2 flex-shrink-0 mt-0.5" />
                     <div>
-                      <h3 className="text-sm font-medium text-muted-foreground">CATEGORY</h3>
+                      <h3 className="text-sm font-medium text-muted-foreground">
+                        CATEGORY
+                      </h3>
                       <p className="font-medium">{product.category}</p>
                     </div>
                   </div>
@@ -196,21 +235,27 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 </div>
 
                 <div className="bg-white rounded-xl p-6 mt-6 border border-orange-light/30 shadow-md">
-                  <h3 className="font-medium mb-3">More from {product.maker.location}</h3>
+                  <h3 className="font-medium mb-3">
+                    More from {product.maker.location}
+                  </h3>
                   <div className="space-y-3">
                     <Link
                       href="#"
                       className="block p-3 rounded-lg border border-orange-light/30 hover:bg-orange-50 transition-colors"
                     >
                       <div className="font-medium">Wayang Chat</div>
-                      <div className="text-sm text-muted-foreground">Express yourself, Indonesian style</div>
+                      <div className="text-sm text-muted-foreground">
+                        Express yourself, Indonesian style
+                      </div>
                     </Link>
                     <Link
                       href="#"
                       className="block p-3 rounded-lg border border-orange-light/30 hover:bg-orange-50 transition-colors"
                     >
                       <div className="font-medium">Tokopintar</div>
-                      <div className="text-sm text-muted-foreground">Manage your toko with ease</div>
+                      <div className="text-sm text-muted-foreground">
+                        Manage your toko with ease
+                      </div>
                     </Link>
                   </div>
                 </div>
@@ -220,6 +265,5 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         </main>
       </div>
     </div>
-  )
+  );
 }
-
