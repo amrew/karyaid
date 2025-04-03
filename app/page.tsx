@@ -1,101 +1,117 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ProductCard } from "@/components/product-card";
+import { Header } from "@/components/header";
+import { Rocket, Zap, TrendingUp } from "lucide-react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  // In a real app, this would come from a database
+  const products = [
+    {
+      id: "1",
+      name: "Nusantara AI",
+      description: "Bahasa Indonesia focused AI assistant for local businesses",
+      tagline: "AI assistant built for Indonesians",
+      upvotes: 423,
+      thumbnail: "/placeholder.svg?height=80&width=80",
+      url: "https://nusantara.ai",
+      maker: {
+        name: "Budi Santoso",
+        avatar: "/placeholder.svg?height=40&width=40",
+        location: "Jakarta",
+      },
+    },
+    {
+      id: "2",
+      name: "Batik Patterns",
+      description: "Generate unique batik patterns with AI for your designs",
+      tagline: "Modern batik designs with a click",
+      upvotes: 387,
+      thumbnail: "/placeholder.svg?height=80&width=80",
+      url: "https://batikpatterns.id",
+      maker: {
+        name: "Dewi Putri",
+        avatar: "/placeholder.svg?height=40&width=40",
+        location: "Yogyakarta",
+      },
+    },
+    {
+      id: "3",
+      name: "LocalEats",
+      description: "Connect with local warung and food vendors for delivery",
+      tagline: "Support local food businesses",
+      upvotes: 352,
+      thumbnail: "/placeholder.svg?height=80&width=80",
+      url: "https://localeats.id",
+      maker: {
+        name: "Arief Wijaya",
+        avatar: "/placeholder.svg?height=40&width=40",
+        location: "Bandung",
+      },
+    },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 confetti-bg"></div>
+        <main className="container mx-auto px-4 py-6 relative">
+          <div className="flex flex-col items-center text-center mb-12 pt-6">
+            <div className="inline-flex items-center justify-center p-2 bg-orange-light/30 rounded-full mb-4">
+              <Rocket className="h-6 w-6 text-orange-dark" />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+              Karya Indonesia
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mb-6">
+              Discover amazing products built by indie developers from
+              Indonesia.
+              <span className="block mt-2 text-lg">
+                Temukan produk-produk keren buatan developer Indonesia!
+              </span>
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link href="/submit">
+                <Button
+                  size="lg"
+                  className="bg-orange-dark hover:bg-orange-dark/90 gap-2"
+                >
+                  <Zap className="h-4 w-4" />
+                  Submit your product
+                </Button>
+              </Link>
+              <Link href="/products">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-orange hover:bg-orange-light/20 hover:text-orange-dark gap-2"
+                >
+                  <TrendingUp className="h-4 w-4" />
+                  View all products
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          <div className="space-y-4 max-w-4xl mx-auto">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold">
+                Today&apos;s Featured Products
+              </h2>
+              <Link
+                href="/products"
+                className="text-sm font-medium text-orange-dark hover:underline"
+              >
+                View all →
+              </Link>
+            </div>
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
