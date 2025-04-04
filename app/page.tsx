@@ -3,54 +3,23 @@ import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/product-card";
 import { Header } from "@/components/header";
 import { Rocket, Zap, TrendingUp } from "lucide-react";
+import { dbServer } from "@/lib/db-server";
 
-export default function Home() {
-  // In a real app, this would come from a database
-  const products = [
-    {
-      id: "1",
-      name: "Nusantara AI",
-      description: "Bahasa Indonesia focused AI assistant for local businesses",
-      tagline: "AI assistant built for Indonesians",
-      upvotes: 423,
-      thumbnail: "/placeholder.svg?height=80&width=80",
-      url: "https://nusantara.ai",
-      maker: {
-        name: "Budi Santoso",
-        avatar: "/placeholder.svg?height=40&width=40",
-        location: "Jakarta",
+export default async function Home() {
+  const result = await dbServer.query({
+    products: {
+      $files: {},
+      categories: {},
+      creators: {
+        $files: {},
+      },
+      $: {
+        where: {
+          featured: true,
+        },
       },
     },
-    {
-      id: "2",
-      name: "Batik Patterns",
-      description: "Generate unique batik patterns with AI for your designs",
-      tagline: "Modern batik designs with a click",
-      upvotes: 387,
-      thumbnail: "/placeholder.svg?height=80&width=80",
-      url: "https://batikpatterns.id",
-      maker: {
-        name: "Dewi Putri",
-        avatar: "/placeholder.svg?height=40&width=40",
-        location: "Yogyakarta",
-      },
-    },
-    {
-      id: "3",
-      name: "LocalEats",
-      description: "Connect with local warung and food vendors for delivery",
-      tagline: "Support local food businesses",
-      upvotes: 352,
-      thumbnail: "/placeholder.svg?height=80&width=80",
-      url: "https://localeats.id",
-      maker: {
-        name: "Arief Wijaya",
-        avatar: "/placeholder.svg?height=40&width=40",
-        location: "Bandung",
-      },
-    },
-  ];
-
+  });
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -106,8 +75,24 @@ export default function Home() {
                 View all →
               </Link>
             </div>
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {result.products.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={{
+                  id: product.id,
+                  name: product.title,
+                  description: product.description,
+                  tagline: product.tagline,
+                  upvotes: 0,
+                  maker: {
+                    name: product.creators?.name || product.title,
+                    avatar:
+                      product.creators?.$files?.url || product.$files?.url,
+                  },
+                  thumbnail: product.$files?.url,
+                  url: product.productURL,
+                }}
+              />
             ))}
           </div>
         </main>
