@@ -14,6 +14,7 @@ interface Product {
   upvotes: number;
   thumbnail: string;
   url: string;
+  slug: string;
   maker: {
     name: string;
     avatar: string;
@@ -29,15 +30,15 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Card className="overflow-hidden border-orange-light/30 shadow-sm">
       <CardContent className="p-0">
-        <div className="flex items-start p-6">
-          <div className="flex-shrink-0 mr-4">
+        <div className="flex flex-col md:flex-row items-start p-4 md:p-6">
+          <div className="flex gap-4 items-center md:flex-shrink-0 mr-4 mb-4 md:mb-0">
             <div className="relative">
               <Image
-                src={product.thumbnail || "/placeholder.svg"}
+                src={product.thumbnail}
                 alt={product.name}
                 width={80}
                 height={80}
-                className="rounded-xl border object-contain border-orange-light/30"
+                className="w-20 h-20 md:w-24 md:h-24 rounded-xl border object-contain border-orange-light/30"
               />
               {product.id === "1" && (
                 <div className="absolute -top-2 -right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-1.5 py-0.5 rounded-full flex items-center">
@@ -46,20 +47,37 @@ export function ProductCard({ product }: ProductCardProps) {
                 </div>
               )}
             </div>
-          </div>
-          <div className="flex-grow">
-            <div className="flex items-center mb-1">
+            <div className="block md:hidden">
               <Link
-                href={`/product/${product.id}`}
-                className="text-xl font-semibold hover:text-orange-dark transition-colors"
+                href={`/products/${product.slug}`}
+                className="text-lg md:text-xl font-semibold hover:text-orange-dark transition-colors"
               >
                 {product.name}
               </Link>
-              <span className="ml-2 text-sm text-muted-foreground">
+              <div>
+                <span className="text-xs text-muted-foreground">
+                  {product.tagline}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="flex-grow">
+            <div className="hidden md:flex flex-col md:flex-row items-start md:items-center mb-1">
+              <Link
+                href={`/products/${product.slug}`}
+                className="text-lg md:text-xl font-semibold hover:text-orange-dark transition-colors"
+              >
+                {product.name}
+              </Link>
+              <span className="ml-0 md:ml-2 text-xs text-muted-foreground">
                 - {product.tagline}
               </span>
             </div>
-            <p className="text-muted-foreground mb-2">{product.description}</p>
+            <Link href={`/products/${product.slug}`}>
+              <p className="text-sm md:text-base text-muted-foreground mb-2">
+                {product.description}
+              </p>
+            </Link>
             <div className="flex items-center">
               <div className="relative mr-2">
                 <div className="w-6 h-6 flex items-center justify-center bg-orange-light/30 rounded-full border border-orange-light/30 text-xs font-bold text-orange-dark">
@@ -77,7 +95,7 @@ export function ProductCard({ product }: ProductCardProps) {
               )}
             </div>
           </div>
-          <div className="flex-shrink-0 ml-4 self-center">
+          <div className="flex-shrink-0 ml-0 md:ml-4 self-end md:self-center mt-4 md:mt-0">
             <Link href={product.url} target="_blank">
               <Button
                 variant="outline"
@@ -88,19 +106,6 @@ export function ProductCard({ product }: ProductCardProps) {
                 Kunjungi
               </Button>
             </Link>
-            {/* <Button
-              variant={hasUpvoted ? "default" : "outline"}
-              size="sm"
-              className={`flex flex-col items-center h-auto py-2 px-3 ${
-                hasUpvoted
-                  ? "bg-orange hover:bg-orange-dark"
-                  : "border-orange-light hover:border-orange hover:bg-orange-light/20"
-              }`}
-              onClick={handleUpvote}
-            >
-              <ChevronUp className="h-4 w-4" />
-              <span className="text-sm font-medium">{upvotes}</span>
-            </Button> */}
           </div>
         </div>
       </CardContent>

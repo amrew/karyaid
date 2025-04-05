@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/product-card";
 import { Header } from "@/components/header";
-import { Rocket, Zap, TrendingUp } from "lucide-react";
+import { Rocket, Zap } from "lucide-react";
 import { dbServer } from "@/lib/db-server";
 
 export default async function Home() {
@@ -50,7 +50,7 @@ export default async function Home() {
                   Submit your product
                 </Button>
               </Link>
-              <Link href="/products">
+              {/* <Link href="/products">
                 <Button
                   variant="outline"
                   size="lg"
@@ -59,21 +59,15 @@ export default async function Home() {
                   <TrendingUp className="h-4 w-4" />
                   View all products
                 </Button>
-              </Link>
+              </Link> */}
             </div>
           </div>
 
           <div className="space-y-4 max-w-4xl mx-auto">
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-col md:flex-row items-center justify-between mb-6">
               <h2 className="text-2xl font-bold">
                 Today&apos;s Featured Products
               </h2>
-              <Link
-                href="/products"
-                className="text-sm font-medium text-orange-dark hover:underline"
-              >
-                View all →
-              </Link>
             </div>
             {result.products.map((product) => (
               <ProductCard
@@ -81,6 +75,7 @@ export default async function Home() {
                 product={{
                   id: product.id,
                   name: product.title,
+                  slug: product.slug,
                   description: product.description,
                   tagline: product.tagline,
                   upvotes: 0,
