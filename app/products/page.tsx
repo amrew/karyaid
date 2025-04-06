@@ -30,6 +30,7 @@ const allProducts = [
   {
     id: "1",
     name: "Nusantara AI",
+    slug: "nusantara-ai",
     description: "Bahasa Indonesia focused AI assistant for local businesses",
     tagline: "AI assistant built for Indonesians",
     upvotes: 423,
@@ -46,6 +47,7 @@ const allProducts = [
   {
     id: "2",
     name: "Batik Patterns",
+    slug: "batik-patterns",
     description: "Generate unique batik patterns with AI for your designs",
     tagline: "Modern batik designs with a click",
     upvotes: 387,
@@ -62,6 +64,7 @@ const allProducts = [
   {
     id: "3",
     name: "LocalEats",
+    slug: "localeats",
     description: "Connect with local warung and food vendors for delivery",
     tagline: "Support local food businesses",
     upvotes: 352,
@@ -78,6 +81,7 @@ const allProducts = [
   {
     id: "4",
     name: "Jelajah",
+    slug: "jelajah",
     description:
       "Discover hidden travel gems across Indonesia's 17,000 islands",
     tagline: "Explore Indonesia like a local",
@@ -95,6 +99,7 @@ const allProducts = [
   {
     id: "5",
     name: "KodeKita",
+    slug: "kodekita",
     description: "Programming tutorials and courses in Bahasa Indonesia",
     tagline: "Learn to code in your language",
     upvotes: 412,
@@ -111,6 +116,7 @@ const allProducts = [
   {
     id: "6",
     name: "Wayang Chat",
+    slug: "wayang-chat",
     description: "Chat app with Indonesian cultural themes and stickers",
     tagline: "Express yourself, Indonesian style",
     upvotes: 521,
@@ -127,6 +133,7 @@ const allProducts = [
   {
     id: "7",
     name: "Tokopintar",
+    slug: "tokopintar",
     description: "Smart inventory management for small Indonesian businesses",
     tagline: "Manage your toko with ease",
     upvotes: 345,
@@ -143,6 +150,7 @@ const allProducts = [
   {
     id: "8",
     name: "Cakrawala",
+    slug: "cakrawala",
     description: "Indonesian news aggregator with fact-checking features",
     tagline: "Stay informed, avoid hoaxes",
     upvotes: 378,
